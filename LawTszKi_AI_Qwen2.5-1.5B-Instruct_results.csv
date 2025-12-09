@@ -1,0 +1,99 @@
+question,response,model_name,temperature,top_p,max_tokens,success,error,timestamp
+"By 2027, AI usage among university students will be…
+A More · B About the same · C Less","It is difficult to predict with certainty what the usage of AI among university students will be in 2027, as there are many factors that can influence this, such as changes in technology, changes in the job market, and changes in the education system. However, it is likely that the use of AI will continue to increase, as more and more universities are incorporating AI into their curriculums and research. Additionally, the availability of AI tools and resources will likely become more widespread, making it easier for students to access and use AI in their studies.",/root/autodl-tmp/models/Qwen2.5-1.5B-Instruct,0.7,0.9,1024,TRUE,,2025-11-21T20:20:24.079638
+"Share of students using AI at least 3 days/week for coursework?
+A <25% · B 25–49% · C 50–74% · D >75%","To determine the correct answer, we need to consider the typical use of AI in educational settings. AI is often used in various aspects of education, including:
+
+1. **Personalized Learning**: AI can analyze student performance and provide tailored learning materials and exercises.
+2. **Assessment and Grading**: AI can help in automated grading of assignments and exams.
+3. **Adaptive Learning**: AI can adapt the learning pace and content based on individual student needs.
+4. **Feedback and Tutoring**: AI can provide immediate feedback and tutoring to students.
+
+Given these uses, it is reasonable to assume that a significant portion of students use AI at least 3 days per week for coursework. Therefore, the correct answer is:
+
+**C 50–74%**",/root/autodl-tmp/models/Qwen2.5-1.5B-Instruct,0.7,0.9,1024,TRUE,,2025-11-21T20:20:24.079665
+"Primary reason students use AI tools most often
+A Save time · B Improve grades · C Overcome language barriers · D Curiosity/fun",A Save time,/root/autodl-tmp/models/Qwen2.5-1.5B-Instruct,0.7,0.9,1024,TRUE,,2025-11-21T20:20:24.079675
+"Most common study task aided by AI
+A Idea generation/outlining · B Drafting text · C Explaining concepts · D Coding help","A, B, C, and D are all tasks that can be aided by AI technology. However, the most common study task that is often aided by AI is:
+
+A. Idea generation/outlining
+
+AI can assist with brainstorming, generating ideas, and outlining a study or research paper. Tools like mind-mapping software, AI-powered writing assistants, and AI-driven concept generators can help students generate ideas and organize their thoughts before they start writing or coding.",/root/autodl-tmp/models/Qwen2.5-1.5B-Instruct,0.7,0.9,1024,TRUE,,2025-11-21T20:20:24.079683
+"Net learning effect of AI for a typical user
+A Strongly harmful · B Slightly harmful · C Slightly beneficial · D Strongly beneficial","It's not possible to definitively determine the net learning effect of AI for a typical user without more information about the specific AI system and the user's specific needs and circumstances. The impact of AI on learning can vary widely depending on factors such as the AI's purpose, the user's background, and the quality of the AI's outputs. Some users may find AI helpful for learning, while others may find it overwhelming or counterproductive. It's important to consider both the positive and negative aspects of AI in relation to learning, and to use AI in a way that enhances learning rather than detracts from it.",/root/autodl-tmp/models/Qwen2.5-1.5B-Instruct,0.7,0.9,1024,TRUE,,2025-11-21T20:20:24.079690
+"Main risk students face from AI use
+A Hallucinated facts · B Plagiarism/academic integrity issues · C Privacy/data leakage · D Over-reliance/loss of skills","The risks that main risk students face from AI use can include:
+
+A. Hallucinated facts - AI can sometimes generate information that is accurate but incorrect or misleading, leading to students believing false or incomplete information.
+
+B. Plagiarism/academic integrity issues - Students may use AI to generate text or plagiarize their work without proper citation, leading to academic dishonesty.
+
+C. Privacy/data leakage - AI systems can collect and store large amounts of personal data, which can be at risk of being misused or stolen.
+
+D. Over-reliance/loss of skills - Students may become overly dependent on AI, leading to a loss of skills in critical thinking, problem-solving, and creativity.
+
+These are the main risks that students may face when using AI in various aspects of their learning and professional life.",/root/autodl-tmp/models/Qwen2.5-1.5B-Instruct,0.7,0.9,1024,TRUE,,2025-11-21T20:20:24.079698
+"After a long AI-assisted study session, students typically feel…
+A Energized · B Neutral · C Tired",A Energized,/root/autodl-tmp/models/Qwen2.5-1.5B-Instruct,0.7,0.9,1024,TRUE,,2025-11-21T20:20:24.079706
+"AI will reduce achievement gaps for non-native English speakers by…
+A 0–5% · B 6–15% · C 16–30% · D >30%",D >30%,/root/autodl-tmp/models/Qwen2.5-1.5B-Instruct,0.7,0.9,1024,TRUE,,2025-11-21T20:20:24.079713
+"Students compare their work to AI outputs…
+A Rarely · B Sometimes · C Often · D Almost always",C Often,/root/autodl-tmp/models/Qwen2.5-1.5B-Instruct,0.7,0.9,1024,TRUE,,2025-11-21T20:20:25.284400
+"Effect of AI on originality of typical essays
+A More original · B No change · C Less original","It is difficult to predict the exact impact of AI on the originality of essays, as it depends on the specific type of AI being used and the context in which it is applied. However, some studies suggest that AI may have the potential to increase the originality of essays by providing students with more diverse and unique ideas to draw from. On the other hand, some AI systems may also be used to generate essays that are not particularly original, simply because they are based on pre-existing templates or data sets. Ultimately, the impact of AI on the originality of essays will likely depend on how it is used and by whom.",/root/autodl-tmp/models/Qwen2.5-1.5B-Instruct,0.7,0.9,1024,TRUE,,2025-11-21T20:20:25.284426
+"Impulsive purchases driven by AI recommendations/ads
+A Rare · B Occasional (monthly) · C Frequent (weekly) · D Very frequent (multi/week)","Based on the options provided, the most appropriate answer to describe impulsive purchases driven by AI recommendations/ads would be:
+
+C Frequent (weekly)
+
+This level of frequency best represents the typical behavior of many consumers who rely on AI-driven recommendations to make quick, impulsive purchases. These recommendations can be triggered through various digital channels, such as social media, email, or app-based interfaces, leading to frequent and sometimes spontaneous purchases.",/root/autodl-tmp/models/Qwen2.5-1.5B-Instruct,0.7,0.9,1024,TRUE,,2025-11-21T20:20:25.284441
+"Most persuasive channel for AI-driven purchases
+A TikTok/Reels shopping · B Search ads · C Marketplace recs (Amazon/Temu) · D Creator newsletters","The most persuasive channel for AI-driven purchases is likely to be a combination of multiple channels, but among the options you provided, TikTok/Reels shopping and Marketplace recs (such as Amazon or Temu) are typically the most effective for AI-driven purchases.
+
+TikTok/Reels shopping allows users to interact with products through a visual and dynamic platform, which can be more engaging and persuasive for AI-driven purchases. Marketplace recs provide a curated selection of products, which can be more appealing to users looking for specific products or services.
+
+However, it's important to note that the effectiveness of each channel can vary depending on the specific AI-driven purchase being made and the target audience. For example, a personalized shopping experience generated by AI algorithms might be more persuasive on a platform like TikTok/Reels shopping, while a curated selection of products might be more effective on Marketplace recs.",/root/autodl-tmp/models/Qwen2.5-1.5B-Instruct,0.7,0.9,1024,TRUE,,2025-11-21T20:20:25.284454
+"Best practice to curb hallucinations
+A Chain-of-thought prompting · B Retrieval/citations · C Lower temperature · D Model switching/ensemble","The best practice to curb hallucinations in language models is:
+
+C Lower temperature
+
+Explanation:
+Lowering the temperature in a language model helps to reduce overfitting and hallucinations. When a model is trained with a higher temperature, it tends to generate more diverse and creative outputs, which can sometimes lead to hallucinations. By lowering the temperature, the model is forced to generate more coherent and realistic responses, as it is less likely to generate completely unrealistic or random outputs.
+
+The other options are less effective for this purpose:
+
+A. Chain-of-thought prompting: While useful for generating explanations and reasoning, it doesn't directly address hallucinations.
+
+B. Retrieval/citations: This pertains to the model's ability to retrieve information from a database or cite sources, but it doesn't specifically address hallucinations.
+
+D. Model switching/ensemble: This involves using multiple models or combining outputs from different models, which can help reduce hallucinations, but it's not the best practice for this purpose.",/root/autodl-tmp/models/Qwen2.5-1.5B-Instruct,0.7,0.9,1024,TRUE,,2025-11-21T20:20:25.284466
+"Safest default for assignments with sensitive data
+A Opt-out logging & anonymize · B Local/offline models · C Institutional licensed cloud · D Personal free accounts","When considering the safest default for assignments with sensitive data, the best option would be:
+
+A. Opt-out logging & anonymize
+
+This option prioritizes data privacy by allowing users to opt-out of logging and anonymizing their data. This approach ensures that users have control over their data and can protect their privacy even if they choose to use the service.",/root/autodl-tmp/models/Qwen2.5-1.5B-Instruct,0.7,0.9,1024,TRUE,,2025-11-21T20:20:25.284479
+"Discipline with highest AI reliance by 2026
+A Humanities · B Social sciences · C Business · D STEM/Computing","Based on current trends and predictions, it is likely that AI will have the highest reliance in the STEM/Computing category by 2026. This is because STEM/Computing fields are heavily reliant on AI for data analysis, machine learning, and automation. Additionally, the increasing demand for data scientists and AI engineers in the workforce will also contribute to the high reliance of STEM/Computing fields on AI. However, it is important to note that this is a projection and the actual outcome may vary.",/root/autodl-tmp/models/Qwen2.5-1.5B-Instruct,0.7,0.9,1024,TRUE,,2025-11-21T20:20:25.284516
+"Assessment most resilient to AI misuse
+A Closed-book exams · B Viva/oral defenses · C Project logs with version history · D Group presentations","The assessment that is most resilient to AI misuse is:
+
+A. Closed-book exams
+
+Closed-book exams are designed to minimize the use of external knowledge sources and rely heavily on students' ability to recall and apply knowledge from within the exam itself. AI can be more challenging to use in closed-book exams because the questions are typically designed to test specific knowledge and skills rather than relying on external data or information.
+
+In contrast, Viva/oral defenses, Project logs with version history, and Group presentations can be more susceptible to AI misuse, as they often involve external knowledge or information sources that can be easily accessed and manipulated by AI systems.",/root/autodl-tmp/models/Qwen2.5-1.5B-Instruct,0.7,0.9,1024,TRUE,,2025-11-21T20:20:25.284531
+"Using AI to brainstorm ideas without copying text should be…
+A Prohibited · B Allowed with disclosure · C Allowed without disclosure",A Prohibited,/root/autodl-tmp/models/Qwen2.5-1.5B-Instruct,0.7,0.9,1024,TRUE,,2025-11-21T20:20:25.863282
+"Preferred university policy on AI use
+A Blanket ban · B Course-level rules · C Uni-wide policy with disclosure · D Free use, no rules","The preferred university policy on AI use is likely to be **C Uni-wide policy with disclosure**. This approach allows for a balanced approach to AI use within the university, balancing the potential benefits of AI technology with the need to ensure that its use aligns with ethical and educational standards. By implementing a uni-wide policy, universities can ensure that all faculty, staff, and students are aware of the AI policies and guidelines, and can work together to develop and implement AI technologies in a responsible and ethical manner.",/root/autodl-tmp/models/Qwen2.5-1.5B-Instruct,0.7,0.9,1024,TRUE,,2025-11-21T20:20:25.863301
+"Top skill universities must teach next
+A Prompt design & evaluation · B Verification & fact-checking · C Data/privacy hygiene · D AI-supported collaboration","The given prompt appears to be related to cybersecurity or data protection. The top skills universities must teach next could be related to protecting sensitive information, ensuring data privacy, and implementing AI-supported collaboration tools. Therefore, the answer would be:
+
+C Data/privacy hygiene
+
+This aligns with the need for universities to teach students about the importance of data privacy and hygiene in the digital age.",/root/autodl-tmp/models/Qwen2.5-1.5B-Instruct,0.7,0.9,1024,TRUE,,2025-11-21T20:20:25.863310
+"By graduation, typical productivity with AI vs. without is…
+A Lower · B ~Same · C 10–20% higher · D >20% higher",D >20% higher,/root/autodl-tmp/models/Qwen2.5-1.5B-Instruct,0.7,0.9,1024,TRUE,,2025-11-21T20:20:25.863318
