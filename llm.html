@@ -308,6 +308,13 @@
                             <li>Educational impacts of AI</li>
                             <li>AI accuracy and regulation</li>
                         </ul>
+                        <p>And there are three main types of LLMs to answer here:</p>
+                        <ul class="space-y-2 pl-5 list-disc">
+                            <li>3 models of Gemma Series (gemma-3-1b-it, gemma-3-4b-it, gemma-3-270m-it)</li>
+                            <li>5 models of Qwen Series (Qwen2.5-0.5B-Instruct, Qwen2.5-1.5B-Instruct, Qwen2.5-3B-Instruct, Qwen2.5-7B-Instructm, Qwen2.5-14B-Instruct-AWQ)</li>
+                            <li>2 models of Yi Series (Yi-1.5-6B-Chat, Yi-1.5-9B-Chat-AWQ)</li>
+                        </ul>
+                        <p>
                         <p>
                             Questions included topics such as university policies toward AI, future skill requirements, 
                             and AI's effect on productivity and academic performance.
@@ -532,7 +539,14 @@
                 </div>
                 <h2 class="text-2xl font-bold text-gray-900">Discussion & Analysis</h2>
             </div>
-            
+            <div class="space-y-4 text-gray-700 leading-relaxed">
+                        <p>
+                           LLMs tend to give similar answers when dealing with predictive questions. For example, in the question 'By 2027, AI usage among university students will be…', nine LLMs agree that AI usage will increase, while only one believes it will decrease. However, the opposite is true for quantitative questions. As noted in the comparative analysis, "inconsistencies in AI-generated outputs can result in divergent interpretations when LLMs are relied upon for scientific purposes" (Álvarez-Martínez et al., 2025, p. 9). When LLMs are required to provide more precise data, their answers are more divergent. For example, in the question 'AI will reduce achievement gaps for non-native English speakers by…', one analyst believes it will reduce the gap by 0–5%, three by 6–15%, two by 16–30%, three by more than 30%, and one does not give a positive answer. The answers provided by LLMs are scattered. The differences between Qwen2.5-0.5B-Instruct and Yi-1.5-6B-Chat are particularly pronounced. Qwen2.5-0.5B-Instruct estimates that AI can reduce learning by 0–5%. It only describes which learning tools utilize AI but lacks analysis of the effectiveness of these tools in learning. Yi-1.5-6B-Chat, on the other hand, estimates reductions of 30% or more, providing several reasons such as personalized learning and multimedia content. Therefore, their answers to quantitative questions tend to be less consistent. Therefore, their answers to quantitative questions tend to be less consistent.
+                        </p>
+                        <p>
+                            Of the 20 questions provided, all were multiple-choice. Most LLMs selected one option, but some did not provide an answer. For example, Gemma-3-1b-it did not select any answer in 5 of the responses. In the question 'Net learning effect of AI for a typical user', it was expected that the LLM would provide a harmful or beneficial answer, but it only analyzed the potential positive and negative impacts of AI on the user based on the answer options. Its answer did not indicate a preference for harmful or beneficial. Other LLMs also failed to answer any of the 20 questions, except for three LLMs (Qwen2.5-0.5B-Instruct, Qwen2.5-3B-Instruct, and Qwen2.5-7B-Instruct) who made explicit selections in all questions.
+                        </p>
+                    </div>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
                 <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6">
                     <div class="flex items-center mb-4">
@@ -853,3 +867,4 @@
     </script>
 </body>
 </html>
+
