@@ -408,7 +408,96 @@
                 </div>
             </div>
         </section>
-
+<section class="bg-white rounded-xl shadow-lg p-6 border border-gray-100 card-hover">
+            <div class="flex items-center mb-6">
+                <div class="bg-purple-100 p-3 rounded-full mr-4">
+                    <i class="fas fa-file-csv text-purple-600 text-xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-900">Research Data Files</h2>
+            </div>
+            
+            <div class="mb-6">
+                <p class="text-gray-700 mb-4">
+                    Access the raw CSV files containing the complete research data for all 10 LLM models analyzed in this study:
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                <!-- CSV File Buttons -->
+                <a href="gemma-3-1b-it.csv" class="bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-lg p-4 flex flex-col items-center justify-center transition-all duration-200 hover:scale-105 hover:shadow-md">
+                    <i class="fas fa-file-csv text-blue-600 text-2xl mb-2"></i>
+                    <span class="text-sm font-medium text-gray-800">Gemma-3-1B</span>
+                    <span class="text-xs text-gray-500 mt-1">CSV File</span>
+                </a>
+                
+                <a href="gemma-3-4b-it.csv" class="bg-green-50 hover:bg-green-100 border border-green-200 rounded-lg p-4 flex flex-col items-center justify-center transition-all duration-200 hover:scale-105 hover:shadow-md">
+                    <i class="fas fa-file-csv text-green-600 text-2xl mb-2"></i>
+                    <span class="text-sm font-medium text-gray-800">Gemma-3-4B</span>
+                    <span class="text-xs text-gray-500 mt-1">CSV File</span>
+                </a>
+                
+                <a href="gemma-3-270m-it.csv" class="bg-red-50 hover:bg-red-100 border border-red-200 rounded-lg p-4 flex flex-col items-center justify-center transition-all duration-200 hover:scale-105 hover:shadow-md">
+                    <i class="fas fa-file-csv text-red-600 text-2xl mb-2"></i>
+                    <span class="text-sm font-medium text-gray-800">Gemma-3-270M</span>
+                    <span class="text-xs text-gray-500 mt-1">CSV File</span>
+                </a>
+                
+                <a href="qwen2.5-0.5b-instruct.csv" class="bg-purple-50 hover:bg-purple-100 border border-purple-200 rounded-lg p-4 flex flex-col items-center justify-center transition-all duration-200 hover:scale-105 hover:shadow-md">
+                    <i class="fas fa-file-csv text-purple-600 text-2xl mb-2"></i>
+                    <span class="text-sm font-medium text-gray-800">Qwen2.5-0.5B</span>
+                    <span class="text-xs text-gray-500 mt-1">CSV File</span>
+                </a>
+                
+                <a href="qwen2.5-1.5b-instruct.csv" class="bg-yellow-50 hover:bg-yellow-100 border border-yellow-200 rounded-lg p-4 flex flex-col items-center justify-center transition-all duration-200 hover:scale-105 hover:shadow-md">
+                    <i class="fas fa-file-csv text-yellow-600 text-2xl mb-2"></i>
+                    <span class="text-sm font-medium text-gray-800">Qwen2.5-1.5B</span>
+                    <span class="text-xs text-gray-500 mt-1">CSV File</span>
+                </a>
+                
+                <a href="qwen2.5-3b-instruct.csv" class="bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 rounded-lg p-4 flex flex-col items-center justify-center transition-all duration-200 hover:scale-105 hover:shadow-md">
+                    <i class="fas fa-file-csv text-indigo-600 text-2xl mb-2"></i>
+                    <span class="text-sm font-medium text-gray-800">Qwen2.5-3B</span>
+                    <span class="text-xs text-gray-500 mt-1">CSV File</span>
+                </a>
+                
+                <a href="qwen2.5-7b-instruct.csv" class="bg-pink-50 hover:bg-pink-100 border border-pink-200 rounded-lg p-4 flex flex-col items-center justify-center transition-all duration-200 hover:scale-105 hover:shadow-md">
+                    <i class="fas fa-file-csv text-pink-600 text-2xl mb-2"></i>
+                    <span class="text-sm font-medium text-gray-800">Qwen2.5-7B</span>
+                    <span class="text-xs text-gray-500 mt-1">CSV File</span>
+                </a>
+                
+                <a href="qwen2.5-14b-instruct-awq.csv" class="bg-teal-50 hover:bg-teal-100 border border-teal-200 rounded-lg p-4 flex flex-col items-center justify-center transition-all duration-200 hover:scale-105 hover:shadow-md">
+                    <i class="fas fa-file-csv text-teal-600 text-2xl mb-2"></i>
+                    <span class="text-sm font-medium text-gray-800">Qwen2.5-14B</span>
+                    <span class="text-xs text-gray-500 mt-1">CSV File</span>
+                </a>
+                
+                <a href="yi-1.5-6b-chat.csv" class="bg-orange-50 hover:bg-orange-100 border border-orange-200 rounded-lg p-4 flex flex-col items-center justify-center transition-all duration-200 hover:scale-105 hover:shadow-md">
+                    <i class="fas fa-file-csv text-orange-600 text-2xl mb-2"></i>
+                    <span class="text-sm font-medium text-gray-800">Yi-1.5-6B</span>
+                    <span class="text-xs text-gray-500 mt-1">CSV File</span>
+                </a>
+                
+                <a href="yi-1.5-9b-chat-awq.csv" class="bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-4 flex flex-col items-center justify-center transition-all duration-200 hover:scale-105 hover:shadow-md">
+                    <i class="fas fa-file-csv text-gray-600 text-2xl mb-2"></i>
+                    <span class="text-sm font-medium text-gray-800">Yi-1.5-9B</span>
+                    <span class="text-xs text-gray-500 mt-1">CSV File</span>
+                </a>
+            </div>
+            
+            <div class="mt-6 pt-6 border-t border-gray-200">
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="flex items-center">
+                        <i class="fas fa-download text-blue-600 mr-2"></i>
+                        <span class="text-sm text-gray-700">Download all CSV files:</span>
+                    </div>
+                    <a href="all_csv_files.zip" class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium py-2 px-6 rounded-lg transition-all duration-200 hover:shadow-lg transform hover:-translate-y-1">
+                        <i class="fas fa-file-archive mr-2"></i>
+                        Download All (ZIP)
+                    </a>
+                </div>
+            </div>
+        </section>
         <!-- Sample Data Table -->
         <section class="bg-white rounded-xl shadow-lg p-6 border border-gray-100 card-hover">
             <div class="flex items-center mb-6">
