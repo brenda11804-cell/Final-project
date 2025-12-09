@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Report - AI Analysis</title>
+    
+    <!-- CDN引用 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    
+    <!-- 内联数据区 -->
+    <script>
+        const sampleData = [
+            {
+                "question": "By 2027, AI usage among university students will be…\nA More · B About the same · C Less",
+                "model_answers": {
+                    "gemma-3-1b-it": "C",
+                    "gemma-3-4b-it": "A",
+                    "gemma-3-270m-it": "A",
+                    "Qwen2.5-0.5B-Instruct": "A",
+                    "Qwen2.5-1.5B-Instruct": "A",
+                    "Qwen2.5-3B-Instruct": "A",
+                    "Qwen2.5-7B-Instruct": "A",
+                    "Qwen2.5-14B-Instruct-AWQ": "A",
+                    "Yi-1.5-6B-Chat": "A",
+                    "Yi-1.5-9B-Chat-AWQ": "A"
+                },
+                "option_counts": {"A": 9, "B": 0, "C": 1, "D": 0, "no ans / others": 0}
+            },
+            {
+                "question": "Share of students using AI at least 3 days/week for coursework?\nA <25% · B 25–49% · C 50–74% · D >75%",
+                "model_answers": {
+                    "gemma-3-1b-it": "A",
+                    "gemma-3-4b-it": "D",
+                    "gemma-3-270m-it": "D",
+                    "Qwen2.5-0.5B-Instruct": "D",
+                    "Qwen2.5-1.5B-Instruct": "C",
+                    "Qwen2.5-3B-Instruct": "C",
+                    "Qwen2.5-7B-Instruct": "B",
+                    "Qwen2.5-14B-Instruct-AWQ": "B",
+                    "Yi-1.5-6B-Chat": "C",
+                    "Yi-1.5-9B-Chat-AWQ": "D"
+                },
+                "option_counts": {"A": 1, "B": 2, "C": 3, "D": 4, "no ans / others": 0}
+            },
+            {
+                "question": "Primary reason students use AI tools most often\nA Save time · B Improve grades · C Overcome language barriers · D Curiosity/fun",
+                "model_answers": {
+                    "gemma-3-1b-it": "A",
+                    "gemma-3-4b-it": "A",
+                    "gemma-3-270m-it": "C",
+                    "Qwen2.5-0.5B-Instruct": "C",
+                    "Qwen2.5-1.5B-Instruct": "A",
+                    "Qwen2.5-3B-Instruct": "A",
+                    "Qwen2.5-7B-Instruct": "A",
+                    "Qwen2.5-14B-Instruct-AWQ": "A",
+                    "Yi-1.5-6B-Chat": "A",
+                    "Yi-1.5-9B-Chat-AWQ": "B"
+                },
+                "option_counts": {"A": 7, "B": 1, "C": 2, "D": 0, "no ans / others": 0}
+            },
+            {
+                "question": "Most common study task aided by AI\nA Idea generation/outlining · B Drafting text · C Explaining concepts · D Coding help",
+                "model_answers": {
+                    "gemma-3-1b-it": "B",
+                    "gemma-3-4b-it": "C",
+                    "gemma-3-270m-it": "A",
+                    "Qwen2.5-0.5B-Instruct": "A, B",
+                    "Qwen2.5-1.5B-Instruct": "A",
+                    "Qwen2.5-3B-Instruct": "D",
+                    "Qwen2.5-7B-Instruct": "B",
+                    "Qwen2.5-14B-Instruct-AWQ": "C",
+                    "Yi-1.5-6B-Chat": "no ans",
+                    "Yi-1.5-9B-Chat-AWQ": "B"
+                },
+                "option_counts": {"A": 2, "B": 3, "C": 2, "D": 1, "no ans / others": 0}
+            },
+            {
+                "question": "Net learning effect of AI for a typical user\nA Strongly harmful · B Slightly harmful · C Slightly beneficial · D Strongly beneficial",
+                "model_answers": {
+                    "gemma-3-1b-it": "no ans",
+                    "gemma-3-4b-it": "C",
+                    "gemma-3-270m-it": "D",
+                    "Qwen2.5-0.5B-Instruct": "C",
+                    "Qwen2.5-1.5B-Instruct": "neutral",
+                    "Qwen2.5-3B-Instruct": "D",
+                    "Qwen2.5-7B-Instruct": "D",
+                    "Qwen2.5-14B-Instruct-AWQ": "D",
+                    "Yi-1.5-6B-Chat": "C",
+                    "Yi-1.5-9B-Chat-AWQ": "D"
+                },
+                "option_counts": {"A": 0, "B": 0, "C": 3, "D": 5, "no ans / others": 0}
+            },
+            {
+                "question": "Main risk students face from AI use\nA Hallucinated facts · B Plagiarism/academic integrity issues · C Privacy/data leakage · D Over-reliance/loss of skills",
+                "model_answers": {
+                    "gemma-3-1b-it": "no ans",
+                    "gemma-3-4b-it": "A, B",
+                    "gemma-3-270m-it": "C",
+                    "Qwen2.5-0.5B-Instruct": "A, B, C",
+                    "Qwen2.5-1.5B-Instruct": "no ans",
+                    "Qwen2.5-3B-Instruct": "D",
+                    "Qwen2.5-7B-Instruct": "A",
+                    "Qwen2.5-14B-Instruct-AWQ": "B, C, D",
+                    "Yi-1.5-6B-Chat": "all",
+                    "Yi-1.5-9B-Chat-AWQ": "C > B > D > A"
+                },
+                "option_counts": {"A": 1, "B": 0, "C": 1, "D": 1, "no ans / others": 0}
+            },
+            {
+                "question": "After a long AI-assisted study session, students typically feel…\nA Energized · B Neutral · C Tired",
+                "model_answers": {
+                    "gemma-3-1b-it": "A",
+                    "gemma-3-4b-it": "C",
+                    "gemma-3-270m-it": "C",
+                    "Qwen2.5-0.5B-Instruct": "A",
+                    "Qwen2.5-1.5B-Instruct": "A",
+                    "Qwen2.5-3B-Instruct": "C",
+                    "Qwen2.5-7B-Instruct": "C",
+                    "Qwen2.5-14B-Instruct-AWQ": "C",
+                    "Yi-1.5-6B-Chat": "A",
+                    "Yi-1.5-9B-Chat-AWQ": "C"
+                },
+                "option_counts": {"A": 4, "B": 0, "C": 6, "D": 0, "no ans / others": 0}
+            },
+            {
+                "question": "AI will reduce achievement gaps for non-native English speakers by…\nA 0–5% · B 6–15% · C 16–30% · D >30%",
+                "model_answers": {
+                    "gemma-3-1b-it": "B",
+                    "gemma-3-4b-it": "C",
+                    "gemma-3-270m-it": "no ans",
+                    "Qwen2.5-0.5B-Instruct": "A",
+                    "Qwen2.5-1.5B-Instruct": "D",
+                    "Qwen2.5-3B-Instruct": "D",
+                    "Qwen2.5-7B-Instruct": "B",
+                    "Qwen2.5-14B-Instruct-AWQ": "C",
+                    "Yi-1.5-6B-Chat": "D",
+                    "Yi-1.5-9B-Chat-AWQ": "B"
+                },
+                "option_counts": {"A": 1, "B": 3, "C": 2, "D": 3, "no ans / others": 0}
+            },
+            {
+                "question": "Students compare their work to AI outputs…\nA Never · B Rarely · C Sometimes · D Often",
+                "model_answers": {
+                    "gemma-3-1b-it": "D",
+                    "gemma-3-4b-it": "B",
+                    "gemma-3-270m-it": "C",
+                    "Qwen2.5-0.5B-Instruct": "A",
+                    "Qwen2.5-1.5B-Instruct": "C",
+                    "Qwen2.5-3B-Instruct": "D",
+                    "Qwen2.5-7B-Instruct": "B",
+                    "Qwen2.5-14B-Instruct-AWQ": "D",
+                    "Yi-1.5-6B-Chat": "D",
+                    "Yi-1.5-9B-Chat-AWQ": "B"
+                },
+                "option_counts": {"A": 1, "B": 3, "C": 2, "D": 4, "no ans / others": 0}
+            },
+            {
+                "question": "Most effective way for universities to regulate AI use\nA Total ban · B Strict guidelines · C AI detection tools · D Student education",
+                "model_answers": {
+                    "gemma-3-1b-it": "C",
+                    "gemma-3-4b-it": "B",
+                    "gemma-3-270m-it": "C",
+                    "Qwen2.5-0.5B-Instruct": "A",
+                    "Qwen2.5-1.5B-Instruct": "C",
+                    "Qwen2.5-3B-Instruct": "C",
+                    "Qwen2.5-7B-Instruct": "B",
+                    "Qwen2.5-14B-Instruct-AWQ": "C",
+                    "Yi-1.5-6B-Chat": "all",
+                    "Yi-1.5-9B-Chat-AWQ": "C"
+                },
+                "option_counts": {"A": 1, "B": 2, "C": 6, "D": 0, "no ans / others": 0}
+            }
+        ];
+
+        const optionDistribution = {"A": 38, "B": 28, "C": 61, "D": 37, "no ans / others": 0};
+        
+        const consistencyData = [
+            {"question": "By 2027, AI usage among university students will be…", "consistency": 90.0, "most_common": "A"},
+            {"question": "Primary reason students use AI tools most often", "consistency": 70.0, "most_common": "A"},
+            {"question": "Discipline with highest AI reliance by 2026", "consistency": 70.0, "most_common": "D"},
+            {"question": "After a long AI-assisted study session, students typically feel…", "consistency": 60.0, "most_common": "C"},
+            {"question": "Most effective way for universities to regulate AI use", "consistency": 60.0, "most_common": "C"},
+            {"question": "Net learning effect of AI for a typical user", "consistency": 50.0, "most_common": "D"},
+            {"question": "Share of students using AI at least 3 days/week for coursework?", "consistency": 40.0, "most_common": "D"},
+            {"question": "AI will reduce achievement gaps for non-native English speakers by…", "consistency": 30.0, "most_common": "B, D"},
+            {"question": "Students compare their work to AI outputs…", "consistency": 30.0, "most_common": "D"},
+            {"question": "Most common study task aided by AI", "consistency": 30.0, "most_common": "B"},
+            {"question": "Top skill universities must teach next", "consistency": 30.0, "most_common": "A"},
+            {"question": "AI's impact on critical thinking skills", "consistency": 30.0, "most_common": "B"},
+            {"question": "Primary benefit of AI for education", "consistency": 30.0, "most_common": "A"},
+            {"question": "Most important factor in choosing an AI tool", "consistency": 30.0, "most_common": "A"},
+            {"question": "Frequency of AI hallucinations in student work", "consistency": 30.0, "most_common": "C"},
+            {"question": "Best practice to curb hallucinations", "consistency": 20.0, "most_common": "C"}
+        ];
+
+        const keyStats = {
+            totalQuestions: 20,
+            totalModels: 10,
+            highestConsistency: 90.0,
+            lowestConsistency: 20.0,
+            mostCommonOption: "C"
+        };
+    </script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 320px;
+        }
+        
+        .section-title {
+            position: relative;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(to right, #3b82f6, #8b5cf6);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-blue-50 min-h-screen">
+    <!-- 头部 -->
+    <header class="bg-white shadow-md border-b border-blue-100 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6">
+            <div class="text-center">
+                <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
+                    <i class="fas fa-brain text-blue-600 mr-3"></i>
+                    LLM Analysis Report
+                </h1>
+                <p class="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto">
+                    Analyzing responses from 10 LLMs across 20 AI-related questions
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-8">
+        <!-- Introduction Section -->
+        <section class="bg-white rounded-xl shadow-lg p-6 sm:p-8 border border-gray-100 card-hover">
+            <div class="flex flex-col lg:flex-row gap-8">
+                <div class="lg:w-1/2">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-blue-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-question-circle text-blue-600 text-xl"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-900">Introduction</h2>
+                    </div>
+                    <div class="space-y-4 text-gray-700 leading-relaxed">
+                        <p>
+                            <strong class="text-blue-600">Research Question:</strong> How do AI models perceive their own use and impact? 
+                            Do they have a positive attitude toward AI adoption, and do different AI systems provide consistent answers?
+                        </p>
+                        <p>
+                            We carried out this study to investigate AI models' perspectives on AI usage in education. 
+                            We explore whether AI systems view themselves as beneficial tools and whether consensus exists 
+                            among different models regarding AI's role, impact, and regulation.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-green-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-flask text-green-600 text-xl"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-900">Methodology</h2>
+                    </div>
+                    <div class="space-y-4 text-gray-700 leading-relaxed">
+                        <p>
+                            We presented 20 carefully designed multiple-choice questions to 10 different large language models (LLMs). 
+                            The questions cover four main themes:
+                        </p>
+                        <ul class="space-y-2 pl-5 list-disc">
+                            <li>Future AI usage predictions</li>
+                            <li>Current AI usage patterns</li>
+                            <li>Educational impacts of AI</li>
+                            <li>AI accuracy and regulation</li>
+                        </ul>
+                        <p>
+                            Questions included topics such as university policies toward AI, future skill requirements, 
+                            and AI's effect on productivity and academic performance.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Metrics -->
+        <section>
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 section-title">Key Metrics</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white rounded-xl shadow-lg p-6 border border-blue-100 card-hover">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Number of Questions</p>
+                            <p class="text-3xl font-bold text-blue-600">20</p>
+                        </div>
+                        <div class="bg-blue-100 p-3 rounded-full">
+                            <i class="fas fa-question-circle text-blue-600 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg p-6 border border-green-100 card-hover">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Number of LLMs</p>
+                            <p class="text-3xl font-bold text-green-600">10</p>
+                        </div>
+                        <div class="bg-green-100 p-3 rounded-full">
+                            <i class="fas fa-robot text-green-600 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg p-6 border border-purple-100 card-hover">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Highest Consistency</p>
+                            <p class="text-3xl font-bold text-purple-600">90%</p>
+                        </div>
+                        <div class="bg-purple-100 p-3 rounded-full">
+                            <i class="fas fa-chart-line text-purple-600 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg p-6 border border-orange-100 card-hover">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Most Common Option</p>
+                            <p class="text-3xl font-bold text-orange-600">C</p>
+                        </div>
+                        <div class="bg-orange-100 p-3 rounded-full">
+                            <i class="fas fa-vote-yea text-orange-600 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Visualization -->
+        <section>
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 section-title">Data Visualization</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Option Distribution -->
+                <div class="bg-white rounded-xl shadow-lg p-6 border border-gray-100 card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-green-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-chart-pie text-green-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900">Answer Distribution</h3>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="optionChart"></canvas>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-4 text-center">
+                        Distribution of answers across all options (A, B, C, D, no answer)
+                    </p>
+                </div>
+
+                <!-- Consistency Chart -->
+                <div class="bg-white rounded-xl shadow-lg p-6 border border-gray-100 card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-purple-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-chart-line text-purple-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900">Answer Consistency</h3>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="consistencyChart"></canvas>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-4 text-center">
+                        Percentage of models agreeing on the most common answer for each question
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sample Data Table -->
+        <section class="bg-white rounded-xl shadow-lg p-6 border border-gray-100 card-hover">
+            <div class="flex items-center mb-6">
+                <div class="bg-blue-100 p-3 rounded-full mr-4">
+                    <i class="fas fa-table text-blue-600 text-xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-900">Detailed Results</h2>
+            </div>
+            <div class="overflow-x-auto rounded-lg border border-gray-200">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Question</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Distribution</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Most Common</th>
+                        </tr>
+                    </thead>
+                    <tbody id="sampleDataTable" class="bg-white divide-y divide-gray-200">
+                    </tbody>
+                </table>
+            </div>
+            <p class="text-sm text-gray-500 mt-4 text-center">
+                Showing first 5 questions from the dataset
+            </p>
+        </section>
+
+        <!-- Discussion Section -->
+        <section class="bg-white rounded-xl shadow-lg p-6 border border-gray-100 card-hover">
+            <div class="flex items-center mb-6">
+                <div class="bg-yellow-100 p-3 rounded-full mr-4">
+                    <i class="fas fa-lightbulb text-yellow-600 text-xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-900">Discussion & Analysis</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-600 p-2 rounded-lg mr-3">
+                            <i class="fas fa-check-circle text-white text-lg"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900">Key Findings</h3>
+                    </div>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                            <div>
+                                <strong>High Consensus Areas:</strong>
+                                <p class="text-gray-700 text-sm mt-1">
+                                    9/10 models predict increased AI usage by 2027. 7/10 believe students primarily use AI to save time.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                            <div>
+                                <strong>Answer Preferences:</strong>
+                                <p class="text-gray-700 text-sm mt-1">
+                                    Option C was selected most frequently (61 times, 35% of all answers).
+                                </p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                            <div>
+                                <strong>Policy Agreement:</strong>
+                                <p class="text-gray-700 text-sm mt-1">
+                                    Models agree on the need for university-wide AI policies with disclosure requirements.
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-orange-600 p-2 rounded-lg mr-3">
+                            <i class="fas fa-exclamation-triangle text-white text-lg"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900">Key Concerns</h3>
+                    </div>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-exclamation text-orange-500 mr-3 mt-1"></i>
+                            <div>
+                                <strong>Inconsistency Issues:</strong>
+                                <p class="text-gray-700 text-sm mt-1">
+                                    Some questions show very low consensus among models (as low as 20% agreement).
+                                </p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-exclamation text-orange-500 mr-3 mt-1"></i>
+                            <div>
+                                <strong>Model Variations:</strong>
+                                <p class="text-gray-700 text-sm mt-1">
+                                    Different AI models exhibit distinct answering patterns and preferences.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-exclamation text-orange-500 mr-3 mt-1"></i>
+                            <div>
+                                <strong>Risk Perception:</strong>
+                                <p class="text-gray-700 text-sm mt-1">
+                                    Models show significant disagreement on AI-related risks and mitigation strategies.
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl p-6 border border-indigo-100">
+                <div class="flex items-center mb-4">
+                    <div class="bg-gradient-to-r from-indigo-600 to-purple-600 p-2 rounded-lg mr-3">
+                        <i class="fas fa-chart-bar text-white text-lg"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900">Deep Insights</h3>
+                </div>
+                <div class="space-y-3 text-gray-700">
+                    <p>
+                        Our analysis reveals that while AI models show strong consensus on broad trends and motivations 
+                        (increasing adoption, time-saving benefits), they diverge significantly on implementation details, 
+                        risk assessment, and technical solutions.
+                    </p>
+                    <p>
+                        This pattern suggests that while the general direction of AI in education is well-understood 
+                        across different models, the complexities of practical application, risk management, and ethical 
+                        considerations remain areas of uncertainty and debate even among AI systems themselves.
+                    </p>
+                    <p class="font-medium text-indigo-600">
+                        The consistency in predicting growth but inconsistency in prescribing solutions highlights the 
+                        need for continued research and human oversight in AI implementation.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+            <div class="text-center">
+                <p class="text-gray-600 mb-2 flex items-center justify-center">
+                    <i class="fas fa-chart-area text-blue-600 mr-2"></i>
+                    LLM Analysis Report - Data-Driven AI Education Insights
+                </p>
+                <p class="text-sm text-gray-500">
+                    © 2024 AI Research Study | Analyzing AI Perspectives on AI
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeData();
+            createOptionChart();
+            createConsistencyChart();
+        });
+
+        function initializeData() {
+            const tableBody = document.getElementById('sampleDataTable');
+            sampleData.slice(0, 5).forEach((item, index) => {
+                const row = document.createElement('tr');
+                row.className = index % 2 === 0 ? 'bg-white' : 'bg-gray-50 hover:bg-gray-100';
+                
+                // Format question text
+                const questionText = item.question.replace(/\n/g, ' ');
+                const shortQuestion = questionText.length > 80 ? 
+                    questionText.substring(0, 80) + '...' : questionText;
+                
+                // Find most common option
+                let mostCommonOption = '';
+                let maxCount = 0;
+                Object.entries(item.option_counts).forEach(([option, count]) => {
+                    if (count > maxCount) {
+                        maxCount = count;
+                        mostCommonOption = option;
+                    }
+                });
+                
+                row.innerHTML = `
+                    <td class="px-6 py-4 text-sm text-gray-900 align-top">
+                        <div class="font-medium">${shortQuestion}</div>
+                    </td>
+                    <td class="px-6 py-4 text-sm text-gray-600 align-top">
+                        <div class="space-y-1">
+                            ${Object.entries(item.option_counts).map(([option, count]) => 
+                                count > 0 ? `<div class="flex items-center">
+                                    <span class="inline-block w-3 h-3 rounded-full mr-2" style="background-color: ${getOptionColor(option)}"></span>
+                                    <span class="font-medium">${option}:</span>
+                                    <span class="ml-1">${count} model${count > 1 ? 's' : ''}</span>
+                                </div>` : ''
+                            ).join('')}
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 align-top">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium" 
+                              style="background-color: ${getOptionColor(mostCommonOption)}20; color: ${getOptionColor(mostCommonOption)}; border: 1px solid ${getOptionColor(mostCommonOption)}40">
+                            ${mostCommonOption} (${maxCount}/${Object.values(item.option_counts).reduce((a, b) => a + b, 0)})
+                        </span>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        function getOptionColor(option) {
+            const colors = {
+                'A': '#3B82F6', // Blue
+                'B': '#10B981', // Green
+                'C': '#F59E0B', // Orange
+                'D': '#EF4444', // Red
+                'no ans / others': '#6B7280' // Gray
+            };
+            return colors[option] || '#6B7280';
+        }
+
+        function createOptionChart() {
+            const ctx = document.getElementById('optionChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(optionDistribution).filter(key => optionDistribution[key] > 0)
+                        .map(label => {
+                            if (label === 'no ans / others') return 'No Answer';
+                            return `Option ${label}`;
+                        }),
+                    datasets: [{
+                        data: Object.values(optionDistribution).filter(value => value > 0),
+                        backgroundColor: [
+                            '#3B82F6', // A - Blue
+                            '#10B981', // B - Green
+                            '#F59E0B', // C - Orange
+                            '#EF4444', // D - Red
+                            '#6B7280'  // No answer - Gray
+                        ],
+                        borderWidth: 2,
+                        borderColor: '#ffffff',
+                        hoverOffset: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '60%',
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true,
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = ((context.parsed / total) * 100).toFixed(1);
+                                    return `${context.label}: ${context.parsed} answers (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createConsistencyChart() {
+            const ctx = document.getElementById('consistencyChart').getContext('2d');
+            const sortedData = [...consistencyData].sort((a, b) => b.consistency - a.consistency);
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: sortedData.map(item => {
+                        // Shorten question for display
+                        const words = item.question.split(' ');
+                        return words.length > 5 ? words.slice(0, 5).join(' ') + '...' : item.question;
+                    }),
+                    datasets: [{
+                        label: 'Consistency (%)',
+                        data: sortedData.map(item => item.consistency),
+                        backgroundColor: sortedData.map(item => {
+                            const color = getOptionColor(item.most_common.split(',')[0].trim());
+                            return color + '80'; // Add transparency
+                        }),
+                        borderColor: sortedData.map(item => getOptionColor(item.most_common.split(',')[0].trim())),
+                        borderWidth: 1,
+                        borderRadius: 4,
+                        hoverBackgroundColor: sortedData.map(item => getOptionColor(item.most_common.split(',')[0].trim()))
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: function(context) {
+                                    const index = context[0].dataIndex;
+                                    return sortedData[index].question;
+                                },
+                                label: function(context) {
+                                    const index = context.dataIndex;
+                                    return [
+                                        `Consistency: ${context.parsed.y}%`,
+                                        `Most Common: ${sortedData[index].most_common}`
+                                    ];
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                maxRotation: 45,
+                                minRotation: 45,
+                                font: {
+                                    size: 10
+                                }
+                            },
+                            grid: {
+                                display: false
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Consistency Percentage'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
